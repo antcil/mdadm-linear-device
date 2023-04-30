@@ -10,7 +10,8 @@ This report will go into detail about the purpose and restrictions of every usab
 
 The mdadm linear device additionally supports caching to improve its efficiency and working with remote JBOD servers.
 
-**Base Functions**\n
+**Base Functions**
+
 int mdadm_mount(): 
 This function is used to mount the desired JBOD device to the mdadm linear device. This allows mdadm to read the number of disks as 1 whole continuous disk. This function takes no parameters. This function must be successfully used for any other base functions to work. Returns a 1 on success and -1 on failure.
 
@@ -24,6 +25,7 @@ int mdadm_write(uint32_t addr, uint32_t len, const uint8_t *buf):
 This function allows the user to write len bytes into the JBOD device starting at addr, *buf points to the buffer that contains the information the user wants to write to the device. Similarly to mdadm_read(), for this function to work properly, there must be a mounted JBOD device, the provided len must not exceed 1024 bytes, the addr must be within bounds of the device, and the pointer must not be pointing to NULL. Returns a 1 on success and -1 on failure.
 
 **Cache Functions**
+
 int cache_create(int num_entries):
 This function allows the user to create a cache structure of the desired number of entries (num_entries). There must not already be a cache created when this function is used. There may be no less than 2 entries and no more than 4096 entries. When this function is used, the mdadm_linear device will be able to perform its actions more efficiently. Returns a 1 on success and -1 on failure.
 
@@ -31,6 +33,7 @@ int cache_destroy():
 This function destroys the previously created cache by freeing all of its allocated data. There must be a created cache for this function to succeed and it takes no parameters. Ensure that you call this function when you are finished using the cache to prevent memory leaks. Returns a 1 on success and -1 on failure.
 
 **Network Functions**
+
 bool jbod_connect(const char *ip, uint16_t port):
 This function allows the user to connect to a remote JBOD server given the correct *ip and port. Whereas the base functions would previously locally execute commands, they will now be sent over to the remote network for execution. In order to connect to the JBOD_SERVER, you should run this command with ip set to "127.0.0.1" and the port set to 3333. Returns true on success and false on failure.
 
