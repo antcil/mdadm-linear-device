@@ -10,7 +10,7 @@ This report will go into detail about the purpose and restrictions of every usab
 
 The mdadm linear device additionally supports caching to improve its efficiency and working with remote JBOD servers.
 
-**Base Functions**
+**Base Functions**\n
 int mdadm_mount(): 
 This function is used to mount the desired JBOD device to the mdadm linear device. This allows mdadm to read the number of disks as 1 whole continuous disk. This function takes no parameters. This function must be successfully used for any other base functions to work. Returns a 1 on success and -1 on failure.
 
